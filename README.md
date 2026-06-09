@@ -1,16 +1,150 @@
-# React + Vite
+# ShopSphere — Luxury E-Commerce Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ShopSphere is a modern luxury-inspired e-commerce frontend built with React, Vite, and Tailwind CSS. The project delivers a premium shopping experience through elegant UI design, responsive layouts, smooth animations, and a carefully crafted warm-gold visual identity.
 
-Currently, two official plugins are available:
+The application features a curated product catalog with category-based browsing, interactive product showcases, a fully designed About page, a responsive Contact page with FAQs and inquiry forms, and a polished navigation system optimized for desktop and mobile devices. Every section follows a consistent design language using sophisticated typography, refined spacing, and immersive visual effects to create a high-end brand experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Modern React + Vite architecture
+- Fully responsive design across devices
+- Luxury-themed UI with warm gold aesthetics
+- Interactive product catalog and filtering
+- Featured categories section
+- Dedicated About and Contact pages
+- FAQ and customer inquiry form
+- Smooth animations and transitions
+- Reusable component-based structure
+- Tailwind CSS for scalable styling
+- React Router DOM for seamless navigation
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠 Tech Stack
+
+- React
+- Vite
+- Tailwind CSS
+- React Router DOM
+- Framer Motion
+- Lucide React
+- Styled Components
+
+---
+
+# 🏠 Home Page
+
+## Hero Section
+
+![Hero Section](src/Components/Screenshots/homeHerosection.png)
+
+## Featured Categories
+
+![Featured Categories](src/Components/Screenshots/homeFeaturedCategories.png)
+
+## Product Showcase
+
+![Product Showcase](src/Components/Screenshots/ProductShowcase.png)
+
+![Product Showcase 2](src/Components/Screenshots/ProductShowcase2.png)
+
+## Newsletter Section
+
+![Newsletter](src/Components/Screenshots/homeNewsletter.png)
+
+## Footer
+
+![Footer](src/Components/Screenshots/homeFooter.png)
+
+---
+
+# 🛍 Products Page
+
+## Product Grid
+
+![Product Grid](src/Components/Screenshots/productGrid.png)
+
+![Product Grid 2](src/Components/Screenshots/productGrid2.png)
+
+---
+
+# ℹ️ About Page
+
+![About Page](src/Components/Screenshots/About2.png)
+
+![About Page](src/Components/Screenshots/About3.png)
+
+![About Page](src/Components/Screenshots/About4.png)
+
+![About Page](src/Components/Screenshots/About5.png)
+
+---
+
+# 📞 Contact Page
+
+![Contact Page](src/Components/Screenshots/Contact1.png)
+
+![Contact Page](src/Components/Screenshots/Contact2.png)
+
+![Contact Page](src/Components/Screenshots/Contact3.png)
+
+![Contact Page](src/Components/Screenshots/Contact4.png)
+
+---
+
+## 🚀 Getting Started
+
+### Clone the Repository
+
+```bash
+git clone <your-repository-url>
+```
+
+### Navigate to Project Folder
+
+```bash
+cd Assignment1
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Start Development Server
+
+```bash
+npm run dev
+```
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+---
+
+## 📱 Responsive Design
+
+ShopSphere is fully optimized for:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile Devices
+
+---
+
+## 🎨 Design Philosophy
+
+The visual identity of ShopSphere is inspired by luxury fashion and premium lifestyle brands. The interface combines elegant typography, refined spacing, warm gold accents, dark premium sections, and modern animations to create a sophisticated shopping experience.
+
+---
+
+## 📄 License
+
+This project is created for learning, portfolio, and frontend development practice purposes.
