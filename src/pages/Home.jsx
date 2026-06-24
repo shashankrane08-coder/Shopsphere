@@ -1,7 +1,7 @@
-import { HeroSection } from "../components/HeroSection";
-import { FeaturedCategories } from "../components/FeaturedCategories";
-import {Newsletter} from '../components/Newsletter';
-import { Footer } from "../components/Footer";
+import { HeroSection } from "../Components/HeroSection";
+import { FeaturedCategories } from "../Components/FeaturedCategories";
+import {Newsletter} from '../Components/Newsletter';
+import { Footer } from "../Components/Footer";
 
 function Home() {
   return (
