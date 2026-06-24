@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
 const NAV_ITEMS = [
@@ -46,7 +46,7 @@ function Navbar() {
   const [catOpen, setCatOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const catRef = useRef();
-
+   const navigate = useNavigate();
   // Close dropdown on outside click
   useEffect(() => {
     const handleClick = (e) => {
@@ -235,6 +235,18 @@ function Navbar() {
               transition-all duration-200 active:translate-y-0">
               Sign In
             </button>
+            {/* Add Product Button */}
+<button
+  onClick={() => navigate("/addYourProduct")}
+  className="ml-1 px-5 py-2 rounded-xl text-[11px] font-semibold uppercase tracking-[0.12em]
+  border border-[#c9a96e]/40 text-[#c9a96e]
+  hover:bg-[#c9a96e]/10 hover:border-[#c9a96e]
+  hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(201,169,110,0.15)]
+  transition-all duration-200 active:translate-y-0"
+>
+  + Add Product
+</button>
+
 
           </div>
         </div>

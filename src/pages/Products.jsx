@@ -1,23 +1,17 @@
-import React, { useState } from "react";
-import { ProductShowcase } from "../components/products/ProductShowcase";
-import { ProductGrid } from "../components/products/ProductGrid";
-import { Footer } from "../Components/Footer";
+import { useState } from "react";
+import { ProductShowcase } from "../Components/Products/ProductShowcase";
+import { ProductGrid } from "../Components/Products/ProductGrid";
 
 function Products() {
   const [activeFilter, setActiveFilter] = useState("All");
 
   return (
-    <div className="min-h-screen bg-[#f3f1eb]">
+    <div>
       <ProductShowcase
         activeFilter={activeFilter}
         setActiveFilter={setActiveFilter}
       />
-
-      <ProductGrid
-        activeFilter={activeFilter}
-      />
-
-      <Footer />
+      <ProductGrid activeFilter={activeFilter} />
     </div>
   );
 }

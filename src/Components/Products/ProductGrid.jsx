@@ -1,111 +1,6 @@
-import React, { useMemo, useState } from "react";
-
-const PRODUCTS = [
-  {
-    id: 1,
-    name: "Luxury Smart Watch",
-    brand: "Aurum",
-    category: "Electronics",
-    price: 7999,
-    originalPrice: 9999,
-    rating: 4.9,
-    reviews: 348,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&q=80",
-    badge: "Trending",
-    badgeColor: "bg-[#c9a96e] text-[#151515]",
-  },
-  {
-    id: 2,
-    name: "Premium Headphones",
-    brand: "Aurum",
-    category: "Electronics",
-    price: 6499,
-    originalPrice: 7999,
-    rating: 4.8,
-    reviews: 215,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&q=80",
-    badge: "Best Seller",
-    badgeColor: "bg-white text-[#151515]",
-  },
-  {
-    id: 3,
-    name: "Designer Sneakers",
-    brand: "Elite",
-    category: "Fashion",
-    price: 4999,
-    originalPrice: null,
-    rating: 4.7,
-    reviews: 189,
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1200&q=80",
-    badge: "New",
-    badgeColor: "bg-emerald-500 text-white",
-  },
-  {
-    id: 4,
-    name: "Luxury Sunglasses",
-    brand: "Elite",
-    category: "Accessories",
-    price: 2999,
-    originalPrice: 3999,
-    rating: 4.8,
-    reviews: 127,
-    image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=1200&q=80",
-    badge: "Premium",
-    badgeColor: "bg-[#c9a96e] text-[#151515]",
-  },
-  {
-    id: 5,
-    name: "Leather Handbag",
-    brand: "Elite",
-    category: "Fashion",
-    price: 6999,
-    originalPrice: null,
-    rating: 4.9,
-    reviews: 403,
-    image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1200&q=80",
-    badge: "Trending",
-    badgeColor: "bg-[#c9a96e] text-[#151515]",
-  },
-  {
-    id: 6,
-    name: "Mechanical Keyboard",
-    brand: "Aurum",
-    category: "Electronics",
-    price: 5499,
-    originalPrice: 6999,
-    rating: 4.8,
-    reviews: 294,
-    image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=1200&q=80",
-    badge: "Premium",
-    badgeColor: "bg-[#c9a96e] text-[#151515]",
-  },
-  {
-    id: 7,
-    name: "Luxury Chair",
-    brand: "Maison",
-    category: "Furniture",
-    price: 18999,
-    originalPrice: 22999,
-    rating: 5.0,
-    reviews: 58,
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80",
-    badge: "Best Seller",
-    badgeColor: "bg-white text-[#151515]",
-  },
-  {
-    id: 8,
-    name: "Premium Speaker",
-    brand: "Aurum",
-    category: "Electronics",
-    price: 4299,
-    originalPrice: null,
-    rating: 4.8,
-    reviews: 176,
-    image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=1200&q=80",
-    badge: "New",
-    badgeColor: "bg-emerald-500 text-white",
-  },
-];
+import { useEffect, useMemo, useState } from "react";
+import { supabase } from "../../Supabase";
+import { getBadgeColorClass } from "../../lib/badgeColors";
 
 /* ── Star Rating ─────────────────────────────────────────────────── */
 function StarRating({ rating }) {
@@ -342,6 +237,8 @@ function ProductCard({ product, onQuickView, wishlist, setWishlist, onAddToCart,
 
 /* ── Product Grid ─────────────────────────────────────────────────── */
 export const ProductGrid = ({ activeFilter }) => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [wishlist, setWishlist] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -350,6 +247,35 @@ export const ProductGrid = ({ activeFilter }) => {
   const [cartCount, setCartCount] = useState(0);
   const [cartToast, setCartToast] = useState(null);
 
+  async function fetchProducts() {
+    setLoading(true);
+
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.log(error);
+      setLoading(false);
+      return;
+    }
+
+    // Adapt DB rows (snake_case) to the shape this UI was built around (camelCase).
+    const formatted = (data || []).map((p) => ({
+      ...p,
+      originalPrice: p.original_price,
+      badgeColor: getBadgeColorClass(p.badge_color),
+    }));
+
+    setProducts(formatted);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   const handleAddToCart = (product) => {
     setCartCount((c) => c + 1);
     setCartToast(product.name);
@@ -357,7 +283,7 @@ export const ProductGrid = ({ activeFilter }) => {
   };
 
   const filteredProducts = useMemo(() => {
-    let list = PRODUCTS.filter((p) => {
+    let list = products.filter((p) => {
       const matchSearch = p.name.toLowerCase().includes(search.toLowerCase());
       const matchFilter =
         activeFilter === "All" ||
@@ -371,7 +297,7 @@ export const ProductGrid = ({ activeFilter }) => {
     if (sortBy === "rating") list = [...list].sort((a, b) => b.rating - a.rating);
 
     return list;
-  }, [search, activeFilter, sortBy]);
+  }, [products, search, activeFilter, sortBy]);
 
   return (
     <>
@@ -451,7 +377,11 @@ export const ProductGrid = ({ activeFilter }) => {
           </div>
 
           {/* ── GRID ─────────────────────────────────────────── */}
-          {filteredProducts.length > 0 ? (
+          {loading ? (
+            <div className="flex items-center justify-center py-28 text-white/40 text-sm">
+              Loading products…
+            </div>
+          ) : filteredProducts.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredProducts.slice(0, visible).map((product, i) => (
                 <ProductCard
